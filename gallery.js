@@ -34,37 +34,49 @@ refs.galleryList.insertAdjacentHTML('beforeend', galleryMarkup);
 
 
 
-// modal
-function  lightboxToggle (e) {
+/*Open and close modal*/
+
+function  onOpenLightboxToggle (e) {
+  e.preventDefault();
+
+  if (e.target.nodeName !== 'IMG') {
+      return;
+  }
 refs.lightbox.classList.toggle('is-open');
 refs.lightbox__image.src = e.target.dataset.source;
-refs.lightbox__image.alt = e.target.dataset.alt;
-e.preventDefault();
+refs.lightbox__image.alt = e.target.alt;
+
+};
+
+function onCloseLightboxBtn (e) {
+  if (e.target.nodeName === 'BUTTON') {
+    removeClassIsOpen();
+  }
+  
+};
+
+function onCloseLightboxOverlay (e) {
+  if (e.currentTarget === e.target) {
+    removeClassIsOpen();
+}
+};
+
+function onCloseLightboxESC (e) {
+  if (e.key !== "Escape") {
+    return;
+  }
+  removeClassIsOpen();
+};
+
+function removeClassIsOpen () {
+  refs.lightbox.classList.remove('is-open');
+  refs.lightbox__image.src = "";
+  refs.lightbox__image.alt = "";
 };
 
 
 
-// open on enter not ready
-// function enterHandler (e) {
-//   if (e.key !== "Enter") {
-//   return;
-    
-//   } lightboxToggle();
-// };
-
-
-
-// close on escape not ready
-// function onCloseLightboxESC (e) {
-//   if (e.key === "Escape") {
-//     lightboxToggle();
-//   }
-  
-// };
-
-
-refs.galleryList.addEventListener('click', lightboxToggle);
-refs.lightbox__button.addEventListener('click', lightboxToggle);
-refs.lightbox__overlay.addEventListener('click', lightboxToggle);
-// window.addEventListener('keyup', onCloseLightboxESC);
-// window.addEventListener('keydown', enterHandler);
+refs.galleryList.addEventListener('click', onOpenLightboxToggle);
+refs.lightbox__button.addEventListener('click', onCloseLightboxBtn);
+refs.lightbox__overlay.addEventListener('click', onCloseLightboxOverlay);
+window.addEventListener('keyup', onCloseLightboxESC);
