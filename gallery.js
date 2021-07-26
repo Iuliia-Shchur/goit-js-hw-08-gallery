@@ -66,5 +66,5 @@ e.preventDefault();
 refs.galleryList.addEventListener('click', lightboxToggle);
 refs.lightbox__button.addEventListener('click', lightboxToggle);
 refs.lightbox__overlay.addEventListener('click', lightboxToggle);
-window.addEventListener('keyup', onCloseLightboxESC);
-window.addEventListener('keydown', enterHandler);
+// window.addEventListener('keyup', onCloseLightboxESC);
+// window.addEventListener('keydown', enterHandler);
