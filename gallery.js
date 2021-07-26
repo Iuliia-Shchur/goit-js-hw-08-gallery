@@ -9,8 +9,6 @@ lightbox__image: document.querySelector('.lightbox__image'),
 lightbox__button: document.querySelector('.lightbox__button'),
 };
 
-const galleryMarkup = createGallery(galleryItems);
-refs.galleryList.insertAdjacentHTML('beforeend', galleryMarkup);
 
 function createGallery (items) {
 return items.map(({preview, original, description}) => {
@@ -27,39 +25,42 @@ return items.map(({preview, original, description}) => {
 `;
 })
 .join('');
-
 };
+
 console.log(createGallery(galleryItems));
+
+const galleryMarkup = createGallery(galleryItems);
+refs.galleryList.insertAdjacentHTML('beforeend', galleryMarkup);
 
 
 
 // modal
 function  lightboxToggle (e) {
-  
 refs.lightbox.classList.toggle('is-open');
 refs.lightbox__image.src = e.target.dataset.source;
 refs.lightbox__image.alt = e.target.dataset.alt;
 e.preventDefault();
 };
 
+
+
 // open on enter not ready
-function enterHandler (e) {
-  if (e.key !== "Enter") {
-  return;
+// function enterHandler (e) {
+//   if (e.key !== "Enter") {
+//   return;
     
-  } lightboxToggle();
-};
+//   } lightboxToggle();
+// };
+
+
 
 // close on escape not ready
-function onCloseLightboxESC (e) {
-  if (e.key === "Escape") {
-    lightboxToggle();
-  }
+// function onCloseLightboxESC (e) {
+//   if (e.key === "Escape") {
+//     lightboxToggle();
+//   }
   
-};
-
-
-
+// };
 
 
 refs.galleryList.addEventListener('click', lightboxToggle);
