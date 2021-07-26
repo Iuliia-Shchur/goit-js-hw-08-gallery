@@ -31,11 +31,39 @@ return items.map(({preview, original, description}) => {
 };
 console.log(createGallery(galleryItems));
 
+
+
+// modal
 function  lightboxToggle (e) {
-  e.preventDefault();
+  
 refs.lightbox.classList.toggle('is-open');
+refs.lightbox__image.src = e.target.dataset.source;
+refs.lightbox__image.alt = e.target.dataset.alt;
+e.preventDefault();
+};
 
-}
+// open on enter not ready
+function enterHandler (e) {
+  if (e.key !== "Enter") {
+  return;
+    
+  } lightboxToggle();
+};
 
-refs.galleryList.addEventListener('click', lightboxToggle)
-refs.lightbox__button.addEventListener('click', lightboxToggle)
+// close on escape not ready
+function onCloseLightboxESC (e) {
+  if (e.key === "Escape") {
+    lightboxToggle();
+  }
+  
+};
+
+
+
+
+
+refs.galleryList.addEventListener('click', lightboxToggle);
+refs.lightbox__button.addEventListener('click', lightboxToggle);
+refs.lightbox__overlay.addEventListener('click', lightboxToggle);
+window.addEventListener('keyup', onCloseLightboxESC);
+window.addEventListener('keydown', enterHandler);
